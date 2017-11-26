@@ -6,6 +6,11 @@
       sh 'dotnet build -c Release  $WORKSPACE'
       }
     }
+    stage('test'){
+      steps{
+      sh 'dotnet test $WORKSPACE/*Test'
+      }
+    }
   }
 
  }
