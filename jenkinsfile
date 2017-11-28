@@ -13,7 +13,7 @@
     }
     stage('package'){
       steps{
-      sh 'dotnet pack --no-build -c Release $(find -name TemplateService.csproj) /p:Version=1.0.$BUILD_NUMBER' /p:PackageId=TemplateServiceID
+      sh 'dotnet pack --no-build -c Release $(find -name TemplateService.csproj) /p:Version=1.0.$BUILD_NUMBER' /p:Id=TemplateServiceID
       }
     }
   }
