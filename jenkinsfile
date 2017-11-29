@@ -16,12 +16,16 @@
       sh 'dotnet pack --no-build -c Release $(find -name TemplateService.csproj) /p:Version=1.0.$BUILD_NUMBER'
       }
     }
+	stage('pushing package to NUGET'){
+      steps{
+      sh 'mono /root/nuget/nuget.exe push -ConfigFile /root/.config/NuGet/NuGet.Config $(find -name TemplateService.*.nupkg) -s http://90.84.47.32:80/nuget/Dev -ApiKey jenkins4proget:WQomQf8ffq86vMfEzKbgh08LQ2SBMbcH9imz57'
+      }
+    }
+	stage('Cleanup'){
+	  steps{
+	  cleanWs externalDelete: 'sudo rm -rf *'
+	}
   }
-    post{
-     always{
-     echo 'pushing the package to proget'
-     sh 'mono /root/nuget/nuget.exe push -ConfigFile /root/.config/NuGet/NuGet.Config $(find -name TemplateService.*.nupkg) -s http://90.84.47.32:80/nuget/Dev -ApiKey jenkins4proget:WQomQf8ffq86vMfEzKbgh08LQ2SBMbcH9imz57'
-     }
     }
 
  }
